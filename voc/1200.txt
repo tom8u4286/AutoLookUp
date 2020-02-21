@@ -315,7 +315,8 @@ even
 evening   
 ever   
 every   
-everyone/ everybody 
+everyone
+everybody 
 everything   
 example   
 excellent   
@@ -952,7 +953,8 @@ socks
 sofa   
 soldier   
 some   
-someone/somebody  
+someone
+somebody  
 something   
 sometimes   
 somewhere   
