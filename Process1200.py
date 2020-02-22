@@ -61,8 +61,7 @@ while l:
     
     l = l.split(". ")
     l = l[1]
-    #print(l)
     fw.write(l+"\n")
-    #print("-------------------")
+
     
     l = f.readline()
