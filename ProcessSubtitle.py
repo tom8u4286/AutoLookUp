@@ -10,6 +10,8 @@ import srt
 import re
 import sys
 import nltk
+import urllib.request, json
+
 
 f = open("source/HouseOfCardsCH1.srt")
 fw = open("HouseOfCardsCh1Voc.txt", 'w')
@@ -48,7 +50,7 @@ for line in l:
         #    continue
         if '\'' in item[0]:
             continue
-        if item[1] == 'VBG' and item[0].strip('ing') in lfrqVerb:
+        if item[0].strip('ing') in lfrqVerb:
             continue
         if item[1] in keep_l:
             if item[1] == 'NNS':
@@ -88,5 +90,18 @@ for line in l:
         #fw.write(line.content+"\n"+str(pos_tags)+"\n"+"#"*20+"\n"+s+"\n"+"="*30+"\n")
         #fw.write(str(line.index)+"\n"+s+"\n"+"="*20+"\n")
     lineCount +=1
-final_list = list(set(final_list))
-fw.write('\n'.join(final_list))
+
+final_list = sorted(list(set(final_list)))
+print(type(final_list))
+key = "784524c7-31f3-4522-9429-6c821112f06d"
+new_list = []
+#for word in final_list:
+#    w = []
+#    with urllib.request.urlopen("https://www.dictionaryapi.com/api/v3/references/collegiate/json/"+word+"?key="+key) as url:
+#        data = json.loads(url.read().decode())
+#        w[0] = word
+#        w[1] = data[0]["fl"]
+#        w[2] = data[0]["def"][0]["sseq"][0][0][1]["dt"][0][1]
+#        new_list.append(" ".join(w))
+
+fw.write("\n".join(final_list))

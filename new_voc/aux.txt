@@ -1,0 +1,11 @@
+be
+can
+cannot
+do
+have
+may
+must
+need
+shall
+should
+will
