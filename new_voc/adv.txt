@@ -9,6 +9,7 @@ already
 also
 altogether
 always
+anymore
 anywhere
 away
 back
@@ -54,6 +55,7 @@ pretty
 probably
 quite
 rather
+really
 right
 seldom
 so
@@ -73,6 +75,7 @@ too
 twice
 up
 upstairs
+usually
 very
 well
 west

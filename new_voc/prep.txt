@@ -30,6 +30,7 @@ near
 of
 off
 on
+onto
 out
 outside
 over
@@ -46,4 +47,5 @@ until
 up
 upon
 with
+within
 without

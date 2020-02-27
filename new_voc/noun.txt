@@ -8,6 +8,8 @@ address
 adult
 advertisement
 advice
+Africa
+African
 afternoon
 age
 aim
@@ -40,6 +42,8 @@ army
 art
 artist
 assistant
+Asia
+Asian
 attack
 attention
 August
@@ -186,6 +190,7 @@ chemistry
 chess
 chicken
 child
+children
 childhood
 chin
 China
@@ -365,6 +370,7 @@ envelope
 environment
 eraser
 error
+Europe
 eve
 evening
 event
@@ -391,6 +397,7 @@ fear
 February
 fee
 feeling
+feet
 female
 fence
 festival
@@ -814,6 +821,7 @@ person
 pet
 phone
 photo
+phrase
 physics
 piano
 picnic
@@ -1235,6 +1243,7 @@ watermelon
 wave
 way
 weather
+web
 wedding
 Wednesday
 week

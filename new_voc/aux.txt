@@ -1,9 +1,12 @@
 be
 can
+could
 cannot
+would
 do
 have
 may
+might
 must
 need
 shall

@@ -18,7 +18,7 @@ herself
 him
 himself
 his
-I
+i
 it
 its
 itself
@@ -55,8 +55,10 @@ those
 us
 we
 what
+whatever
 which
 who
+whom
 whose
 you
 your

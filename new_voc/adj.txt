@@ -6,7 +6,7 @@ alike
 alive
 all
 alone
-American
+american
 ancient
 angry
 another
@@ -18,6 +18,8 @@ backward
 bad
 basic
 beautiful
+best
+better
 big
 bitter
 black
@@ -390,6 +392,8 @@ wild
 windy
 wise
 wonderful
+worse
+worst
 wrong
 yellow
 yesterday
