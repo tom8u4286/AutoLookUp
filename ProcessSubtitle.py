@@ -12,89 +12,115 @@ import sys
 import nltk
 import urllib.request, json
 
+#2000 words from the junior high new_voc/
+#prepare the remove list
+l_abbr = [voc.strip(' \n').lower() for voc in open("new_voc/abbr.txt")]
+l_adj = [voc.strip(' \n') for voc in open("new_voc/adj.txt")]
+l_adv = [voc.strip(' \n') for voc in open("new_voc/adv.txt")]
+l_aux = [voc.strip(' \n') for voc in open("new_voc/aux.txt")]
+l_conj = [voc.strip(' \n') for voc in open("new_voc/conj.txt")]
+l_verb = [voc.strip(' \n') for voc in open("new_voc/final_verbs.txt")]
+l_noun = [voc.strip(' \n').lower() for voc in open("new_voc/noun.txt")]
+l_prep = [voc.strip(' \n') for voc in open("new_voc/prep.txt")]
+l_pron = [voc.strip(' \n') for voc in open("new_voc/pron.txt")]
+l_well = [voc.strip(' \n') for voc in open("new_voc/well.txt")]
+l_names = [voc.strip(' \n').lower() for voc in open("new_voc/names_HOC.txt")]
+l_dirty = [voc.strip(' \n').lower() for voc in open("new_voc/dirty.txt")]
+l_brand = [voc.strip(' \n').lower() for voc in open("new_voc/brand.txt")]
+l_letter = [voc.strip(' \n').lower() for voc in open("new_voc/letter.txt")]
+remove_l = l_abbr + l_adj + l_adv + l_aux + l_conj + l_verb + l_noun + l_prep + l_pron + l_well + l_names + l_dirty + l_brand + l_letter
 
+#prepare the subtitle file, and parse it with srt package
 f = open("source/HouseOfCardsCH1.srt")
-fw = open("HouseOfCardsCh1Voc.txt", 'w')
-
-#simple 2000 words from the junior high voc
-l1200 = [voc.strip(' \n') for voc in open("voc/1200.txt")]
-l800 = [voc.strip(' \n') for voc in open("voc/800.txt")]
-
-#frequent 100 verbs
-lfrqVerb = [voc.strip(' \n') for voc in open("voc/frqVerb.txt")]
-
-#frequent easy words that the nltk cannot strip out. manually edited.
-lfrqWord = [voc.strip(' \n') for voc in open("voc/frqWords.txt")]
-
-remove_l = l1200+l800+lfrqVerb+lfrqWord
-
 l = list(srt.parse(f))
 
 final_list = []
-lineCount = 1
-for line in l:
-    #get the subtitles and strip the special marks <i> in the lines.
+lineCount = 0
+for line in l: 
+    lineCount +=1
+
+    #the fine descript of the file would be indexed by 9999
     if line.index == 9999:
         break
-    s = line.content.strip('<i>').strip('</i>')
-
     #use nltk POS tags to check
-    keep_l = ['JJR','JJS','NN','NNS','RB','RBR','RBS','VB','VBD','VBG','VBN','VBP','VBZ']
-    #abandon_l = ['\'s','\'m','\'re','\'ve','n\'t']
-    words = nltk.word_tokenize(s)
-    pos_tags = nltk.pos_tag(words)
-    #print(pos_tags)
-    new_l = []
-    for item in pos_tags:
-        #if item[0] in abandon_l:
-        #    continue
-        if '\'' in item[0]:
-            continue
-        if item[0].strip('ing') in lfrqVerb:
-            continue
-        if item[1] in keep_l:
-            if item[1] == 'NNS':
-                word = re.sub(r's$','',item[0]) 
-                new_l.append(word)
-            elif item[1] == 'VBZ':
-                word = re.sub(r's$','',item[0])
-                new_l.append(word)
-            else:      
-                new_l.append(item[0])
+    #keep_l = ['JJR','JJS','NN','NNS','RB','RBR','RBS','VB','VBD','VBG','VBN','VBP','VBZ']
+    #words = nltk.word_tokenize(s)
+    #pos_tags = nltk.pos_tag(words)
+    #new_l = []
+    #for item in pos_tags:
+    #    #if item[0] in abandon_l:
+    #    #    continue
+    #    if '\'' in item[0]:
+    #        continue
+    #    if item[0].strip('ing') in lfrqVerb:
+    #        continue
+    #    if item[1] in keep_l:
+    #        if item[1] == 'NNS':
+    #            word = re.sub(r's$','',item[0]) 
+    #            new_l.append(word)
+    #        elif item[1] == 'VBZ':
+    #            word = re.sub(r's$','',item[0])
+    #            new_l.append(word)
+    #        else:      
+    #            new_l.append(item[0])
+    #s = " ".join(new_l).lower()
 
-    #remove the speciall mark in srt files
-    #s = s.strip('<\i>')
+    #get the subtitles and strip the special marks <i> in the lines.
+    line = line.content.strip('<i>').strip('</i>')
+    #remove the numbers in line
+    line = re.sub(r'[^\w\s]','',line)
+    #remove the punctuations in line
+    line = re.sub("\d+", "", line)
 
-    #remove the punctuations in lines
-    #s = re.sub(r'[^\w\s]','',s)
-
-    #remove the numbers
-    #s = re.sub("\d+", "", s) 
-
-    s = " ".join(new_l).lower()
-        
-    vocCount = 1
-    s = s.split()
-    for voc in remove_l:
-        if voc in s:
-            #remove all the voc in line
-            s = list(filter((voc).__ne__,s))
-        sys.stdout.write("\rStatus:%s/%s, Lines of File:%s/%s"%(vocCount, len(remove_l), lineCount, len(l)))
-        sys.stdout.flush()     
-
-        vocCount +=1
+    words = list(set(line.lower().split())) 
     
-    if len(s) > 0:
-        final_list += s
+    w = []
+    for word in words:
+        if word in remove_l:
+            continue
+        if word.endswith("s") and word[:-1] in remove_l:
+            continue
+        if word.endswith("d") and (word.strip("d") or word.strip("ed")) in remove_l:
+            continue
+        w.append(word)
+            
+    #vocCount = 0
+    #for voc in remove_l:
+    #    vocCount +=1
+    #    if voc in words:
+    #        #filter: remove all the voc in line
+    #        words = list(filter((voc).__ne__,words))
+    #    sys.stdout.write("\rStatus:%s/%s, Lines of File:%s/%s"%(vocCount, len(remove_l), lineCount, len(l)-1))
+    #    sys.stdout.flush()     
+    
+    if len(w) > 0:
+        final_list += w
         #s = ' '.join(s)
         #fw.write(line.content+"\n"+str(pos_tags)+"\n"+"#"*20+"\n"+s+"\n"+"="*30+"\n")
         #fw.write(str(line.index)+"\n"+s+"\n"+"="*20+"\n")
-    lineCount +=1
+
+    sys.stdout.write("\rLines of File:%s/%s"%(lineCount, len(l)-1))
+    sys.stdout.flush()     
 
 final_list = sorted(list(set(final_list)))
-print(type(final_list))
-key = "784524c7-31f3-4522-9429-6c821112f06d"
-new_list = []
+
+cleaned_list = []
+for word in final_list:
+    if word.endswith('s') and word[:-1] in final_list:
+        continue
+    if word.endswith("ly") and word[:-2] in final_list:
+        continue
+    if word.endswith("ing") and word[:-3] in final_list:
+        continue
+    cleaned_list.append(word)
+
+
+fw = open("HouseOfCardsCh1Voc.txt", 'w')
+fw.write("\n".join(cleaned_list))
+
+
+#key = "784524c7-31f3-4522-9429-6c821112f06d"
+#new_list = []
 #for word in final_list:
 #    w = []
 #    with urllib.request.urlopen("https://www.dictionaryapi.com/api/v3/references/collegiate/json/"+word+"?key="+key) as url:
@@ -104,4 +130,3 @@ new_list = []
 #        w[2] = data[0]["def"][0]["sseq"][0][0][1]["dt"][0][1]
 #        new_list.append(" ".join(w))
 
-fw.write("\n".join(final_list))
