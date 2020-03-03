@@ -1,12 +1,10 @@
-f = open("noun.txt").read().split('\n')
+f = open("noun_source.txt").read().split('\n')
 
 l1 = []
 l2 = []
 l3 = []
 l4 = []
 l5 = []
-
-
 
 for line in f:
     line = line.split('\t')
@@ -22,8 +20,10 @@ for line in f:
     if "五" in line[0]:
         l5.append(line[1])
 
-fw = open("noun5.txt","w")
-l = l5
+l = l1+l2+l3+l4+l5
 #fw = open("adv5.txt","w")
 #l = l5
+#print(l)
+#exit()
+fw = open("../noun.txt","w")
 fw.write("\n".join(l))

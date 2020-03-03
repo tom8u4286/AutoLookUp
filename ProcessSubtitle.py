@@ -4,7 +4,7 @@ date: Feb/20, 2020
 author: YiFan Chu
 
 Purpose:
-    This program aims to process the source of the subtitle of movies, and finally yield the vocabulary.
+    This program aims to process the source of the subtitle of movies, and finally yield the hard vocabulary.
 """
 import srt
 import re
@@ -12,24 +12,25 @@ import sys
 import nltk
 import urllib.request, json
 
+voc_dir = "GSAT_voc/"
+
 #2000 words from the junior high new_voc/
 #prepare the remove list
-l_abbr = [voc.strip(' \n').lower() for voc in open("new_voc/abbr.txt")]
-l_adj = [voc.strip(' \n') for voc in open("new_voc/adj.txt")]
-l_adv = [voc.strip(' \n') for voc in open("new_voc/adv.txt")]
-l_aux = [voc.strip(' \n') for voc in open("new_voc/aux.txt")]
-l_conj = [voc.strip(' \n') for voc in open("new_voc/conj.txt")]
-l_verb = [voc.strip(' \n') for voc in open("new_voc/final_verbs.txt")]
-l_noun = [voc.strip(' \n').lower() for voc in open("new_voc/noun.txt")]
-l_prep = [voc.strip(' \n') for voc in open("new_voc/prep.txt")]
-l_pron = [voc.strip(' \n') for voc in open("new_voc/pron.txt")]
-l_well = [voc.strip(' \n') for voc in open("new_voc/well.txt")]
-l_names = [voc.strip(' \n').lower() for voc in open("new_voc/names_HOC.txt")]
-l_dirty = [voc.strip(' \n').lower() for voc in open("new_voc/dirty.txt")]
-l_brand = [voc.strip(' \n').lower() for voc in open("new_voc/brand.txt")]
-l_letter = [voc.strip(' \n').lower() for voc in open("new_voc/letter.txt")]
+l_abbr = [voc.strip(' \n').lower() for voc in open(voc_dir+"abbr.txt")]
+l_adj = [voc.strip(' \n') for voc in open(voc_dir+"adj.txt")]
+l_adv = [voc.strip(' \n') for voc in open(voc_dir+"adv.txt")]
+l_aux = [voc.strip(' \n') for voc in open(voc_dir+"aux.txt")]
+l_conj = [voc.strip(' \n') for voc in open(voc_dir+"conj.txt")]
+l_verb = [voc.strip(' \n') for voc in open(voc_dir+"final_verbs.txt")]
+l_noun = [voc.strip(' \n').lower() for voc in open(voc_dir+"noun.txt")]
+l_prep = [voc.strip(' \n') for voc in open(voc_dir+"prep.txt")]
+l_pron = [voc.strip(' \n') for voc in open(voc_dir+"pron.txt")]
+l_well = [voc.strip(' \n') for voc in open(voc_dir+"well.txt")]
+l_names = [voc.strip(' \n').lower() for voc in open(voc_dir+"names_HOC.txt")]
+l_dirty = [voc.strip(' \n').lower() for voc in open(voc_dir+"dirty.txt")]
+l_brand = [voc.strip(' \n').lower() for voc in open(voc_dir+"brand.txt")]
+l_letter = [voc.strip(' \n').lower() for voc in open(voc_dir+"letter.txt")]
 remove_l = l_abbr + l_adj + l_adv + l_aux + l_conj + l_verb + l_noun + l_prep + l_pron + l_well + l_names + l_dirty + l_brand + l_letter
-
 #prepare the subtitle file, and parse it with srt package
 f = open("source/HouseOfCardsCH1.srt")
 l = list(srt.parse(f))
