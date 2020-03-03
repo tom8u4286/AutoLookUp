@@ -21,9 +21,7 @@ for line in f:
         l5.append(line[1])
 
 l = l1+l2+l3+l4+l5
-#fw = open("adv5.txt","w")
 #l = l5
-#print(l)
-#exit()
+l = sorted(l)
 fw = open("../noun.txt","w")
 fw.write("\n".join(l))

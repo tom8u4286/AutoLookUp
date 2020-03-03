@@ -1,7 +1,7 @@
 import urllib.request, json
 import sys
 
-f = open("verb1234.txt")
+f = open("verb.txt")
 #f = json.load(open("test.json"))
 #data = json.dumps(f[0]["meta"]["stems"])
 words = f.read().split("\n")
@@ -9,7 +9,7 @@ words = f.read().split("\n")
 
 key = "784524c7-31f3-4522-9429-6c821112f06d"
 
-fw = open("final_verbs1234.txt","w")
+fw = open("verb_stems.txt","w")
 final_verb_l = []
 cnt = 0
 for word in words:
