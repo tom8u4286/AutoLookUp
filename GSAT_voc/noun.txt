@@ -479,7 +479,6 @@ cabinet
 cable
 cactus
 cafeteria
-café
 cage
 cake
 calculation
@@ -559,7 +558,6 @@ cell-phone
 cellar
 cello
 cellphone
-cellular phone
 cement
 cent
 center
@@ -734,7 +732,6 @@ communist
 community
 commuter
 compact
-compact disk
 companion
 company
 comparison
@@ -1319,8 +1316,6 @@ fertilizer
 festival
 fetch
 fever
-fiancé
-fiancée
 fiber
 fiction
 fiddle
@@ -3455,7 +3450,6 @@ symphony
 syrup
 system
 table
-table tennis
 tablet
 tack
 tag
